@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -5,27 +6,24 @@ export type LogoProps = {
   className?: string;
 };
 
-/**
- * Placeholder wordmark.
- *
- * The Foundation has not supplied an official logo, so this renders the
- * organization name as a two-line text lockup rather than inventing a mark. The
- * accessible name comes from the text itself, so no redundant ARIA is needed.
- *
- * To adopt the official asset, replace the two spans with an <Image> and keep
- * the wrapping <Link>. No call site needs to change.
- */
 export function Logo({ className }: LogoProps) {
   return (
     <Link
       href="/"
+      aria-label="Canadian Sheba Foundation home"
       className={cn(
-        "group inline-flex flex-col rounded-sm font-heading leading-none font-bold tracking-[0.1em] text-foreground uppercase transition-colors hover:text-primary",
+        "group inline-flex shrink-0 items-center rounded-sm transition-opacity hover:opacity-90",
         className
       )}
     >
-      <span className="text-[0.95rem]">Canadian</span>
-      <span className="text-[0.95rem]">Sheba Foundation</span>
+      <Image
+        src="/images/Untitled design (1).png"
+        alt="Canadian Sheba Foundation"
+        width={1867}
+        height={412}
+        priority
+        className="h-14 w-auto object-contain sm:h-16"
+      />
     </Link>
   );
 }
