@@ -110,8 +110,8 @@ const home: HomeContent = {
   },
 
   heroImage: {
-    src: null,
-    alt: null,
+    src: "/images/Ai-image.jpg",
+    alt: "A family meeting with a community support worker",
     pendingLabel: "Image pending",
     pendingNote:
       "Official Foundation photography has not been supplied yet. This space is reserved for it.",

@@ -253,4 +253,58 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /*
+   * Scroll Reveal Animations
+   * Subtle fade + translateY reveal for homepage sections.
+   * Respects prefers-reduced-motion via the rule above.
+   * Progressive enhancement: only animates when .js class is present on <html>
+   */
+  .js .scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+  }
+
+  .js .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .js .scroll-reveal-delay-1 {
+    transition-delay: 80ms;
+  }
+  .js .scroll-reveal-delay-2 {
+    transition-delay: 160ms;
+  }
+  .js .scroll-reveal-delay-3 {
+    transition-delay: 240ms;
+  }
+  .js .scroll-reveal-delay-4 {
+    transition-delay: 320ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .js .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .js .scroll-reveal-delay-1,
+    .js .scroll-reveal-delay-2,
+    .js .scroll-reveal-delay-3,
+    .js .scroll-reveal-delay-4 {
+      transition-delay: 0ms !important;
+    }
+  }
 }

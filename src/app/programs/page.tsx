@@ -8,6 +8,7 @@ import { ArrowRight, Users, Target } from "lucide-react";
 import { getPrograms } from "@/content/programs";
 import { toRoute } from "@/lib/routes";
 import { generatePageMetadata } from "@/lib/seo";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
 export const metadata = generatePageMetadata({
   title: "Our Programs",
@@ -26,62 +27,70 @@ export default async function ProgramsPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="What we do"
-        title="Our Programs"
-        description="The Foundation's program areas. Select a program for more detail."
-      />
+      <ScrollReveal delay={0}>
+        <PageHeader
+          eyebrow="What we do"
+          title="Our Programs"
+          description="The Foundation's program areas. Select a program for more detail."
+        />
+      </ScrollReveal>
 
-      <Section tone="subtle" className="border-y border-border">
-        <Container className="max-w-4xl">
-          <div className="prose prose-muted max-w-none">
-            <p className="text-lead">
-              The Foundation&apos;s work is organised around practical, direct program areas.
-              Each program is described with only the detail that has been confirmed so far,
-              and fuller information is published as it becomes available.
-            </p>
-            <p className="mt-4">
-              Programs marked <strong>&ldquo;Details to be confirmed&rdquo;</strong> are recognised
-              program areas where official eligibility criteria, application processes, or
-              service specifics are still being finalised by the Foundation.
-            </p>
-          </div>
-        </Container>
-      </Section>
+      <ScrollReveal delay={80}>
+        <Section tone="subtle" className="border-y border-border">
+          <Container className="max-w-4xl">
+            <div className="prose prose-muted max-w-none">
+              <p className="text-lead">
+                The Foundation&apos;s work is organised around practical, direct program areas.
+                Each program is described with only the detail that has been confirmed so far,
+                and fuller information is published as it becomes available.
+              </p>
+              <p className="mt-4">
+                Programs marked <strong>&ldquo;Details to be confirmed&rdquo;</strong> are recognised
+                program areas where official eligibility criteria, application processes, or
+                service specifics are still being finalised by the Foundation.
+              </p>
+            </div>
+          </Container>
+        </Section>
+      </ScrollReveal>
 
-      <ProgramsGrid programs={programs} />
+      <ScrollReveal delay={160}>
+        <ProgramsGrid programs={programs} />
+      </ScrollReveal>
 
-      <Section tone="subtle" className="bg-primary text-primary-foreground border-t border-border">
-        <Container className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-xl">
-            <h2 className="text-h3">Want to get involved?</h2>
-            <p className="mt-2 text-primary-foreground/80">
-              Volunteer your time, make a donation, or reach out to learn how you can
-              support the Foundation&apos;s community-focused work.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="secondary" size="lg">
-              <Link href={toRoute("/volunteer")}>
-                Volunteer
-                <Users className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href={toRoute("/donate")}>
-                Donate
-                <Target className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href={toRoute("/contact")}>
-                Contact Us
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-        </Container>
-      </Section>
+      <ScrollReveal delay={240}>
+        <Section tone="subtle" className="bg-primary text-primary-foreground border-t border-border">
+          <Container className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="max-w-xl">
+              <h2 className="text-h3">Want to get involved?</h2>
+              <p className="mt-2 text-primary-foreground/80">
+                Volunteer your time, make a donation, or reach out to learn how you can
+                support the Foundation&apos;s community-focused work.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button asChild variant="secondary" size="lg">
+                <Link href={toRoute("/volunteer")}>
+                  Volunteer
+                  <Users className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href={toRoute("/donate")}>
+                  Donate
+                  <Target className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href={toRoute("/contact")}>
+                  Contact Us
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+          </Container>
+        </Section>
+      </ScrollReveal>
     </>
   );
 }

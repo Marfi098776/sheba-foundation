@@ -24,6 +24,10 @@ export const contactContent = {
   },
   generalNotice:
     "Contact information to be provided by the Foundation. This page will be updated once official details are confirmed.",
+  whatsapp: {
+    enabled: false,
+    defaultMessage: "Hello, I would like to contact Canadian Sheba Foundation.",
+  },
 };
 
 export type ContactPageContent = typeof contactContent;

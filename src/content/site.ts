@@ -35,6 +35,12 @@ export const SITE_TAGLINE =
  */
 export const SITE_URL: string | null = null;
 
+/**
+ * WhatsApp configuration. The phone number should be in international format
+ * (e.g., +15551234567). Null until the client supplies the official number.
+ */
+export const WHATSAPP_PHONE: string | null = null;
+
 const NAV_ITEMS: NavigationItem[] = [
   { label: "Home", href: "/", group: "organization", inHeader: false },
   { label: "About Us", href: "/about", group: "organization", inHeader: true },
@@ -134,6 +140,7 @@ const siteInfo: SiteInfo = {
   // Empty until the client confirms which platforms the Foundation uses.
   social: [],
   nav: NAV_ITEMS,
+  whatsappPhone: WHATSAPP_PHONE,
 };
 
 /**
@@ -152,4 +159,14 @@ export async function getHeaderNav(): Promise<NavigationItem[]> {
 /** Every navigation destination, for the mobile menu. */
 export async function getAllNav(): Promise<NavigationItem[]> {
   return siteInfo.nav;
+}
+
+/**
+ * Returns the WhatsApp configuration for the site.
+ * The phone number is read from environment at runtime in the component layer.
+ */
+export function getWhatsAppConfig() {
+  return {
+    phoneNumber: WHATSAPP_PHONE,
+  };
 }

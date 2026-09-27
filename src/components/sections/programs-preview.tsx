@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { getHomeContent } from "@/content/home";
 import { getPrograms } from "@/content/programs";
 import type { Program, ProgramCategory } from "@/content/types";
@@ -36,6 +37,8 @@ const CATEGORY_ICONS: Record<ProgramCategory, typeof Users> = {
 function programHref(program: Program): string {
   return program.dedicatedRoute ?? `/programs/${program.slug}`;
 }
+
+const STAGGER_DELAYS = [0, 80, 160, 240, 320];
 
 /**
  * Homepage preview of the confirmed program areas.
@@ -60,39 +63,42 @@ export async function ProgramsPreview() {
         />
 
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program) => {
+          {programs.map((program, index) => {
             const Icon = CATEGORY_ICONS[program.category];
+            const delay = STAGGER_DELAYS[index % STAGGER_DELAYS.length];
 
             return (
-              <li key={program.slug} className="h-full">
-                <Card className="h-full">
-                  <CardHeader>
-                    <Icon
-                      aria-hidden="true"
-                      className="size-6 text-primary"
-                      strokeWidth={1.75}
-                    />
-                    {program.status === "pending-details" ? (
-                      <Badge variant="secondary" className="mt-3">
-                        Details to be confirmed
-                      </Badge>
-                    ) : null}
-                    <h3 className="mt-3 font-heading text-lg leading-snug font-semibold">
-                      {program.title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent className="flex flex-col gap-4">
-                    <CardDescription>{program.summary}</CardDescription>
-                    <Link
-                      href={toRoute(programHref(program))}
-                      className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary hover:underline"
-                    >
-                      Learn More
-                      <span aria-hidden="true">&rarr;</span>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </li>
+              <ScrollReveal key={program.slug} delay={delay}>
+                <li className="h-full">
+                  <Card className="h-full">
+                    <CardHeader>
+                      <Icon
+                        aria-hidden="true"
+                        className="size-6 text-primary"
+                        strokeWidth={1.75}
+                      />
+                      {program.status === "pending-details" ? (
+                        <Badge variant="secondary" className="mt-3">
+                          Details to be confirmed
+                        </Badge>
+                      ) : null}
+                      <h3 className="mt-3 font-heading text-lg leading-snug font-semibold">
+                        {program.title}
+                      </h3>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-4">
+                      <CardDescription>{program.summary}</CardDescription>
+                      <Link
+                        href={toRoute(programHref(program))}
+                        className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary hover:underline"
+                      >
+                        Learn More
+                        <span aria-hidden="true">&rarr;</span>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </li>
+              </ScrollReveal>
             );
           })}
         </ul>

@@ -3,6 +3,7 @@ import { Inter, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/shared/skip-link";
+import { HtmlClassEnhancer } from "@/components/shared/html-class-enhancer";
 import { SITE_TAGLINE } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { generatePageMetadata } from "@/lib/seo";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-dvh flex-col antialiased">
         <SkipLink />
+        <HtmlClassEnhancer />
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex-1">
           {children}

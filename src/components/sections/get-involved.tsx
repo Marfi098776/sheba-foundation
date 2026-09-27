@@ -3,6 +3,7 @@ import { CalendarDays, Handshake, HeartHandshake } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { Section } from "@/components/shared/section";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { getHomeContent } from "@/content/home";
 import { getOrganization } from "@/content/organization";
 import type { InvolvedPathIconKey } from "@/content/types";
@@ -13,6 +14,8 @@ const PATH_ICONS: Record<InvolvedPathIconKey, typeof HeartHandshake> = {
   partner: Handshake,
   events: CalendarDays,
 };
+
+const STAGGER_DELAYS = [0, 80, 160, 240];
 
 /**
  * Get involved: the three concrete ways to take part.
@@ -46,45 +49,47 @@ export async function GetInvolved() {
 
           <div className="lg:col-span-8">
             <ul className="flex flex-col">
-              {copy.paths.map((path) => {
+              {copy.paths.map((path, index) => {
                 const Icon = PATH_ICONS[path.icon];
+                const delay = STAGGER_DELAYS[index % STAGGER_DELAYS.length];
 
                 return (
-                  <li
-                    key={path.id}
-                    className="grid gap-4 border-t border-border py-7 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-6"
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="size-6 text-primary"
-                      strokeWidth={1.75}
-                    />
-
-                    <div>
-                      <h3 className="font-heading text-h4 font-semibold">
-                        {path.title}
-                      </h3>
-                      <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-                        {path.description}
-                      </p>
-                      {path.id === "volunteer" &&
-                      volunteers.opportunities.length > 0 ? (
-                        <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
-                          {volunteers.opportunities.map((opportunity) => (
-                            <li key={opportunity}>{opportunity}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-
-                    <Link
-                      href={toRoute(path.href)}
-                      className="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary hover:underline"
+                  <ScrollReveal key={path.id} delay={delay}>
+                    <li
+                      className="grid gap-4 border-t border-border py-7 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-6"
                     >
-                      {path.linkLabel}
-                      <span aria-hidden="true">&rarr;</span>
-                    </Link>
-                  </li>
+                      <Icon
+                        aria-hidden="true"
+                        className="size-6 text-primary"
+                        strokeWidth={1.75}
+                      />
+
+                      <div>
+                        <h3 className="font-heading text-h4 font-semibold">
+                          {path.title}
+                        </h3>
+                        <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+                          {path.description}
+                        </p>
+                        {path.id === "volunteer" &&
+                        volunteers.opportunities.length > 0 ? (
+                          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
+                            {volunteers.opportunities.map((opportunity) => (
+                              <li key={opportunity}>{opportunity}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+
+                      <Link
+                        href={toRoute(path.href)}
+                        className="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary hover:underline"
+                      >
+                        {path.linkLabel}
+                        <span aria-hidden="true">&rarr;</span>
+                      </Link>
+                    </li>
+                  </ScrollReveal>
                 );
               })}
             </ul>

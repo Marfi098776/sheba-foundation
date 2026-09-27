@@ -2,6 +2,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { InformationNotice } from "@/components/sections/information-notice";
 import { SupportCta } from "@/components/sections/support-cta";
 import { ContactForm } from "@/components/forms/contact-form";
+import { WhatsAppCTA } from "@/components/shared/whatsapp-cta";
 import { getContactContent } from "@/content/contact";
 import { getSiteContent } from "@/content/site";
 import { Section } from "@/components/shared/section";
@@ -23,8 +24,14 @@ export const metadata = generatePageMetadata({
 
 export default async function ContactPage() {
   const contactContent = await getContactContent();
-  const { contact, name } = await getSiteContent();
+  const { contact, name, whatsappPhone } = await getSiteContent();
   const hasContact = Boolean(contact.email || contact.phone || contact.address);
+
+  // Check if form should be enabled based on email configuration
+  const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_RECIPIENT_EMAIL && process.env.EMAIL_FROM);
+
+  // Check if WhatsApp is configured
+  const whatsAppEnabled = Boolean(whatsappPhone);
 
   return (
     <>
@@ -156,15 +163,41 @@ export default async function ContactPage() {
         </Section>
       )}
 
+      {/* WhatsApp CTA */}
+      {whatsAppEnabled && (
+        <Section>
+          <Container className="max-w-4xl">
+            <WhatsAppCTA
+              config={{ phoneNumber: whatsappPhone, defaultMessage: contactContent.whatsapp.defaultMessage }}
+              title="Quick message on WhatsApp"
+              description="Send us a direct message on WhatsApp for a faster response."
+            />
+          </Container>
+        </Section>
+      )}
+
       <Section className="border-y border-border">
         <Container className="max-w-4xl">
           <h2 className="text-h3">Send us a message</h2>
-          <InformationNotice
-            title="Contact form status"
-            description={contactContent.form.note}
-            variant="pending"
-          />
-          <ContactForm />
+          {formEnabled ? (
+            <>
+              <InformationNotice
+                title="Contact form active"
+                description="Fill out the form below and we&apos;ll get back to you as soon as possible."
+                variant="info"
+              />
+              <ContactForm />
+            </>
+          ) : (
+            <>
+              <InformationNotice
+                title="Contact form status"
+                description={contactContent.form.note}
+                variant="pending"
+              />
+              <ContactForm />
+            </>
+          )}
         </Container>
       </Section>
 

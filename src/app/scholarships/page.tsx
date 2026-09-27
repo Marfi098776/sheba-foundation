@@ -10,6 +10,7 @@ import { getSupportContent } from "@/content/support";
 import { getProgram } from "@/content/programs";
 import { CONTENT_PENDING_NOTICE } from "@/content/site";
 import { generatePageMetadata } from "@/lib/seo";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
 export async function generateMetadata(): Promise<Metadata> {
   const program = await getProgram("scholarships-grants");
@@ -38,69 +39,87 @@ export default async function ScholarshipsPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Our Programs"
-        title={program.title}
-        description={program.summary}
-      />
+      <ScrollReveal delay={0}>
+        <PageHeader
+          eyebrow="Our Programs"
+          title={program.title}
+          description={program.summary}
+        />
+      </ScrollReveal>
 
-      <PendingInformation status={program.status} programTitle={program.title} />
+      <ScrollReveal delay={80}>
+        <PendingInformation status={program.status} programTitle={program.title} />
+      </ScrollReveal>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-muted max-w-none">
-            <h2 className="text-h3">Overview</h2>
-            <p className="mt-4 text-lead">{content.introduction}</p>
+      <ScrollReveal delay={160}>
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="prose prose-muted max-w-none">
+              <h2 className="text-h3">Overview</h2>
+              <p className="mt-4 text-lead">{content.introduction}</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
-      <WhoThisProgramIsFor
-        description={content.whoMayBeSupported?.join(" ") ?? "Eligibility criteria and target recipients have not been confirmed. Details will be published when approved by the Foundation."}
-      />
+      <ScrollReveal delay={160}>
+        <WhoThisProgramIsFor
+          description={content.whoMayBeSupported?.join(" ") ?? "Eligibility criteria and target recipients have not been confirmed. Details will be published when approved by the Foundation."}
+        />
+      </ScrollReveal>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-muted max-w-none">
-            <h2 className="text-h3">How applications will work</h2>
-            <p className="mt-4 text-lead">{content.howApplicationsWillWork}</p>
+      <ScrollReveal delay={240}>
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="prose prose-muted max-w-none">
+              <h2 className="text-h3">How applications will work</h2>
+              <p className="mt-4 text-lead">{content.howApplicationsWillWork}</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-muted max-w-none">
-            <h2 className="text-h3">Application requirements</h2>
-            <p className="mt-4 text-lead">{content.applicationRequirements}</p>
+      <ScrollReveal delay={240}>
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="prose prose-muted max-w-none">
+              <h2 className="text-h3">Application requirements</h2>
+              <p className="mt-4 text-lead">{content.applicationRequirements}</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
-      <InformationNotice
-        title="Application status"
-        description={content.applicationStatus ?? "Applications are not currently open. Official application details will be published by the Foundation when available."}
-        variant="pending"
-      />
+      <ScrollReveal delay={240}>
+        <InformationNotice
+          title="Application status"
+          description={content.applicationStatus ?? "Applications are not currently open. Official application details will be published by the Foundation when available."}
+          variant="pending"
+        />
+      </ScrollReveal>
 
-      <HowToGetInvolved
-        description="When the Scholarships & Grants program launches, details on how to apply will be published here. In the meantime, you can reach out with questions or explore other ways to support the Foundation's work."
-        primaryLabel="Contact us for details"
-        primaryHref="/contact"
-        secondaryLabel="Volunteer"
-        secondaryHref="/volunteer"
-        tertiaryLabel="Donate"
-        tertiaryHref="/donate"
-      />
+      <ScrollReveal delay={320}>
+        <HowToGetInvolved
+          description="When the Scholarships & Grants program launches, details on how to apply will be published here. In the meantime, you can reach out with questions or explore other ways to support the Foundation's work."
+          primaryLabel="Contact us for details"
+          primaryHref="/contact"
+          secondaryLabel="Volunteer"
+          secondaryHref="/volunteer"
+          tertiaryLabel="Donate"
+          tertiaryHref="/donate"
+        />
+      </ScrollReveal>
 
-      <SupportCta
-        title="Support the Scholarships & Grants program"
-        description="Your donation helps make future scholarships and grants possible. The Foundation does not process payments directly; donations go through an external platform."
-        primaryLabel="Donate"
-        primaryHref="/donate"
-        secondaryLabel="Volunteer"
-        secondaryHref="/volunteer"
-      />
+      <ScrollReveal delay={320}>
+        <SupportCta
+          title="Support the Scholarships & Grants program"
+          description="Your donation helps make future scholarships and grants possible. The Foundation does not process payments directly; donations go through an external platform."
+          primaryLabel="Donate"
+          primaryHref="/donate"
+          secondaryLabel="Volunteer"
+          secondaryHref="/volunteer"
+        />
+      </ScrollReveal>
     </>
   );
 }

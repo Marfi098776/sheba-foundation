@@ -22,6 +22,10 @@ export type VolunteerPageContent = VolunteerInfo & {
     secondaryLabel: string;
     secondaryHref: string;
   };
+  whatsapp: {
+    enabled: boolean;
+    defaultMessage: string;
+  };
 };
 
 export const volunteerContent: VolunteerPageContent = {
@@ -122,6 +126,10 @@ export const volunteerContent: VolunteerPageContent = {
     primaryHref: "/volunteer",
     secondaryLabel: "Contact us",
     secondaryHref: "/contact",
+  },
+  whatsapp: {
+    enabled: false,
+    defaultMessage: "Hello, I am interested in volunteering with Canadian Sheba Foundation.",
   },
 };
 

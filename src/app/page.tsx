@@ -7,6 +7,7 @@ import { Mission } from "@/components/sections/mission";
 import { ProgramsPreview } from "@/components/sections/programs-preview";
 import { SupportCta } from "@/components/sections/support-cta";
 import { ValuesPreview } from "@/components/sections/values-preview";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { generatePageMetadata } from "@/lib/seo";
 
 /**
@@ -32,14 +33,30 @@ export const metadata: Metadata = generatePageMetadata({
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Mission />
-      <ProgramsPreview />
-      <ValuesPreview />
-      <GetInvolved />
-      <SupportCta />
-      <ContentPreview />
-      <FinalCta />
+      <ScrollReveal>
+        <Hero />
+      </ScrollReveal>
+      <ScrollReveal delay={80}>
+        <Mission />
+      </ScrollReveal>
+      <ScrollReveal delay={160}>
+        <ProgramsPreview />
+      </ScrollReveal>
+      <ScrollReveal delay={240}>
+        <ValuesPreview />
+      </ScrollReveal>
+      <ScrollReveal delay={160}>
+        <GetInvolved />
+      </ScrollReveal>
+      <ScrollReveal delay={240}>
+        <SupportCta />
+      </ScrollReveal>
+      <ScrollReveal delay={160}>
+        <ContentPreview />
+      </ScrollReveal>
+      <ScrollReveal delay={240}>
+        <FinalCta />
+      </ScrollReveal>
     </>
   );
 }

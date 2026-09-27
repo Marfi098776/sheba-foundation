@@ -87,6 +87,8 @@ export interface SiteInfo {
   donation: DonationInfo;
   social: SocialLink[];
   nav: NavigationItem[];
+  /** WhatsApp phone number in international format (e.g., +15551234567). Null until confirmed. */
+  whatsappPhone: string | null;
 }
 
 /** A distinct activity or offering within a program. */

@@ -2,7 +2,9 @@ import { PageHeader } from "@/components/sections/page-header";
 import { InformationNotice } from "@/components/sections/information-notice";
 import { SupportCta } from "@/components/sections/support-cta";
 import { VolunteerForm } from "@/components/forms/volunteer-form";
+import { WhatsAppCTA } from "@/components/shared/whatsapp-cta";
 import { getVolunteerContent } from "@/content/volunteer";
+import { getSiteContent } from "@/content/site";
 import { toRoute } from "@/lib/routes";
 import { Section } from "@/components/shared/section";
 import { Container } from "@/components/shared/container";
@@ -24,6 +26,13 @@ export const metadata = generatePageMetadata({
 
 export default async function VolunteerPage() {
   const content = await getVolunteerContent();
+  const { whatsappPhone } = await getSiteContent();
+
+  // Check if form should be enabled based on email configuration
+  const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_RECIPIENT_EMAIL && process.env.EMAIL_FROM);
+
+  // Check if WhatsApp is configured
+  const whatsAppEnabled = Boolean(whatsappPhone);
 
   return (
     <>
@@ -108,14 +117,43 @@ export default async function VolunteerPage() {
         </Container>
       </Section>
 
+      {/* WhatsApp CTA for volunteer page */}
+      {whatsAppEnabled && (
+        <Section>
+          <Container className="max-w-4xl">
+            <WhatsAppCTA
+              config={{ phoneNumber: whatsappPhone, defaultMessage: content.whatsapp.defaultMessage }}
+              title="Quick question about volunteering?"
+              description="Message us on WhatsApp to learn more about volunteer opportunities."
+            />
+          </Container>
+        </Section>
+      )}
+
       <Section className="border-y border-border">
         <Container className="max-w-4xl">
           <h2 className="text-h3">Volunteer registration</h2>
-          <p className="mt-2 text-muted-foreground text-lead">
-            The volunteer registration form below is for demonstration purposes.
-            Online registration is not yet available.
-          </p>
-          <VolunteerForm />
+          {formEnabled ? (
+            <>
+              <p className="mt-2 text-muted-foreground text-lead">
+                Fill out the form below to express your interest in volunteering.
+              </p>
+              <InformationNotice
+                title="Volunteer registration active"
+                description="Complete the form below and our team will review your application."
+                variant="info"
+              />
+              <VolunteerForm />
+            </>
+          ) : (
+            <>
+              <p className="mt-2 text-muted-foreground text-lead">
+                The volunteer registration form below is for demonstration purposes.
+                Online registration is not yet available.
+              </p>
+              <VolunteerForm />
+            </>
+          )}
         </Container>
       </Section>
 
