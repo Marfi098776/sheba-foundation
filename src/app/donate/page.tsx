@@ -6,6 +6,12 @@ import { DonateCta } from "@/components/sections/donate-cta";
 import { SupportCta } from "@/components/sections/support-cta";
 import { getSiteContent } from "@/content/site";
 import { generatePageMetadata } from "@/lib/seo";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { donation } = await getSiteContent();
@@ -126,46 +132,64 @@ export default async function DonatePage() {
         </Container>
       </Section>
 
+      {/* p-4 rounded-xl border border-border bg-card
+      container: max-w-3xl */}
+
       <Section>
         <Container className="max-w-3xl">
           <h2 className="text-h3">Frequently asked questions</h2>
-          <dl className="mt-6 flex flex-col gap-6">
-            <div className="p-4 rounded-xl border border-border bg-card">
-              <dt className="font-medium">Is my donation tax-deductible?</dt>
-              <dd className="mt-2 text-muted-foreground">
+
+          <Accordion type="single" collapsible className="mt-6 w-full">
+            <AccordionItem value="tax-deductible" className="p-4 m-2 rounded-xl border border-border bg-card">
+              <AccordionTrigger className="hover:no-underline text-lg">
+                Is my donation tax-deductible?
+              </AccordionTrigger>
+              <AccordionContent>
                 Official charitable registration and tax-deductibility information
                 will be published by the Foundation once confirmed.
-              </dd>
-            </div>
-            <div className="p-4 rounded-xl border border-border bg-card">
-              <dt className="font-medium">Can I make a recurring donation?</dt>
-              <dd className="mt-2 text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="recurring-donation" className="p-4 m-2 rounded-xl border border-border bg-card">
+              <AccordionTrigger className="hover:no-underline text-lg">
+                Can I make a recurring donation?
+              </AccordionTrigger>
+              <AccordionContent>
                 Recurring donation options depend on the external donation platform.
                 Details will be available once the platform is confirmed.
-              </dd>
-            </div>
-            <div className="p-4 rounded-xl border border-border bg-card">
-              <dt className="font-medium">Will I receive a receipt?</dt>
-              <dd className="mt-2 text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="receipt" className="p-4 m-2 rounded-xl border border-border bg-card">
+              <AccordionTrigger className="hover:no-underline text-lg">
+                Will I receive a receipt?
+              </AccordionTrigger>
+              <AccordionContent>
                 Receipting is handled by the external donation platform. The
                 Foundation will publish its official receipting policy when available.
-              </dd>
-            </div>
-            <div className="p-4 rounded-xl border border-border bg-card">
-              <dt className="font-medium">Can I direct my donation to a specific program?</dt>
-              <dd className="mt-2 text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="specific-program" className="p-4 m-2 rounded-xl border border-border bg-card">
+              <AccordionTrigger className="hover:no-underline text-lg">
+                Can I direct my donation to a specific program?
+              </AccordionTrigger>
+              <AccordionContent>
                 Program-specific giving options will depend on the external platform&apos;s
                 capabilities and the Foundation&apos;s published policies.
-              </dd>
-            </div>
-            <div className="p-4 rounded-xl border border-border bg-card">
-              <dt className="font-medium">What payment methods are accepted?</dt>
-              <dd className="mt-2 text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="payment-methods" className="p-4 m-2 rounded-xl border border-border bg-card">
+              <AccordionTrigger className="hover:no-underline text-lg">
+                What payment methods are accepted?
+              </AccordionTrigger>
+              <AccordionContent>
                 Accepted payment methods are determined by the external donation
                 platform and will be communicated once the platform is confirmed.
-              </dd>
-            </div>
-          </dl>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </Container>
       </Section>
 

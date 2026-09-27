@@ -29,7 +29,7 @@ const breadcrumbItems = [
 ];
 
 export default async function AboutPage() {
-  const { about, mission, vision, charitablePurposes, history, board, leadership, volunteers } =
+  const { about, mission, vision, charitablePurposes, history, board, leadership, foundingPatronsNote, volunteers } =
     await getOrganization();
 
   return (
@@ -169,6 +169,20 @@ export default async function AboutPage() {
                 The Foundation has not yet published board member or leadership team details.
                 This section will be updated once approved materials are supplied.
               </p>
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {foundingPatronsNote && (
+        <Section tone="subtle" className="border-y border-border">
+          <Container className="max-w-4xl">
+            <SectionHeading
+              title="Founding Patrons"
+              description="Recognition for the Foundation's major supporters."
+            />
+            <div className="mt-10 rounded-xl border border-border bg-muted p-8 sm:p-10 text-center">
+              <p className="text-lead text-muted-foreground">{foundingPatronsNote}</p>
             </div>
           </Container>
         </Section>

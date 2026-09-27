@@ -22,7 +22,7 @@ export function Logo({ className }: LogoProps) {
         width={1867}
         height={412}
         priority
-        className="h-14 w-auto object-contain sm:h-16"
+        className="h-14 w-auto object-contain sm:h-16 rounded-md"
       />
     </Link>
   );

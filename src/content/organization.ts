@@ -26,7 +26,37 @@ const organization: OrganizationInfo = {
   charitablePurposes: [],
   history: null,
   board: [],
-  leadership: [],
+  leadership: [
+    {
+      id: "mahmuda-mukty",
+      name: "Dr. Mahmuda Mukty",
+      role: "Founder and Chairman/President",
+      bio: null,
+      photo: null,
+    },
+    {
+      id: "mohammed-rashedul-alam",
+      name: "Mohammed Rashedul Alam",
+      role: "Vice President",
+      bio: null,
+      photo: null,
+    },
+    {
+      id: "mahmudul-mannan",
+      name: "Dr. Mahmudul Mannan",
+      role: "Secretary",
+      bio: null,
+      photo: null,
+    },
+    {
+      id: "shahed-iqbal",
+      name: "Dr. Shahed Iqbal",
+      role: "Treasurer",
+      bio: null,
+      photo: null,
+    },
+  ],
+  foundingPatronsNote: "Major donors will be designated as Founding Patrons.",
   volunteers: {
     description: null,
     opportunities: [

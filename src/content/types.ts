@@ -172,6 +172,8 @@ export interface OrganizationInfo {
   history: string | null;
   board: Person[];
   leadership: Person[];
+  /** Note about the Founding Patrons position, null until the client supplies wording. */
+  foundingPatronsNote: string | null;
   volunteers: VolunteerInfo;
   registration: CharityRegistration;
 }

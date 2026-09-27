@@ -18,10 +18,10 @@ const WIDTH = 1200;
 const HEIGHT = 630;
 
 // Colors derived from design tokens in globals.css
-const PRIMARY = "#4A6F8A"; // oklch(0.44 0.072 208)
-const BACKGROUND = "#FEFDF8"; // oklch(0.995 0.002 90)
-const FOREGROUND = "#364052"; // oklch(0.21 0.025 235)
-const MUTED = "#7A8592"; // oklch(0.44 0.02 225)
+const PRIMARY = "#1E3A8A"; // oklch(0.38 0.14 255)
+const BACKGROUND = "#F8FAFC"; // oklch(0.992 0.003 250)
+const FOREGROUND = "#0F172A"; // oklch(0.20 0.03 255)
+const MUTED = "#64748B"; // oklch(0.42 0.02 250)
 
 export default function OGImage() {
   return new ImageResponse(
