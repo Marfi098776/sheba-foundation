@@ -34,23 +34,23 @@ export async function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border bg-secondary">
       <Container className="py-14">
-        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
-          <div className="max-w-sm">
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))_1.5fr]">
+          <div className="min-w-0">
             <Logo className="text-foreground" />
             <p className="mt-4 text-sm text-muted-foreground">{tagline}</p>
+
             <div className="mt-6">
               <DonateButton size="default" />
             </div>
           </div>
 
-          <div className="lg:flex-1">
-            <FooterNav groups={groups} />
-          </div>
+          <FooterNav groups={groups} />
 
-          <div className="max-w-xs">
+          <div className="min-w-0">
             <h2 className="text-sm font-semibold tracking-wide text-foreground uppercase">
               Contact
             </h2>
+
             <ContactBlock contact={contact} />
           </div>
         </div>
@@ -92,11 +92,11 @@ function ContactBlock({ contact }: { contact: ContactInfo }) {
   const { email, phone, address } = contact;
   const addressLines = address
     ? [
-        address.street,
-        address.locality,
-        [address.region, address.postalCode].filter(Boolean).join(" "),
-        address.country,
-      ].filter((line): line is string => Boolean(line && line.trim()))
+      address.street,
+      address.locality,
+      [address.region, address.postalCode].filter(Boolean).join(" "),
+      address.country,
+    ].filter((line): line is string => Boolean(line && line.trim()))
     : [];
 
   const hasAny = Boolean(email || phone || addressLines.length > 0);

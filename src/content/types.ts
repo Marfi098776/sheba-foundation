@@ -123,7 +123,7 @@ export interface Program {
   dedicatedRoute: string | null;
   status: ProgramStatus;
   /** Path under /public. Null until photography is supplied. */
-  image: string | null;
+  image: string;
 }
 
 export interface ImpactStat {

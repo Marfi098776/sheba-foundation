@@ -5,18 +5,17 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * PROVISIONAL DESIGN SYSTEM
- * ------------------------
- * The Canadian Sheba Foundation has not yet supplied official brand assets or
- * colours. The palette below is a neutral, deliberately non-generic placeholder
- * intended to be replaced wholesale once real brand guidelines arrive.
+ * CANADIAN SHEBA FOUNDATION DESIGN SYSTEM
+ * ----------------------------------------
+ * Purple-based brand palette with reusable gradient tokens.
  *
- * To rebrand: edit the `:root` block and the two font variables in
- * `src/app/layout.tsx`. No component should hardcode a colour value.
+ * To rebrand: edit the :root block and the two font variables in
+ * src/app/layout.tsx. Components should use theme tokens rather than
+ * hardcoded colour values wherever possible.
  */
 
 @theme {
-  /* Fluid type scale. Generates text-display, text-h1 ... text-h4, text-lead. */
+  /* Fluid type scale. Generates text-display, text-h1 ... text-h4. */
   --text-display: clamp(2.25rem, 1.55rem + 2.8vw, 3.5rem);
   --text-display--line-height: 1.1;
   --text-display--letter-spacing: -0.02em;
@@ -43,32 +42,44 @@
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+
   --font-heading: var(--font-source-serif), ui-serif, Georgia, Cambria, serif;
 
+  /* Core colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* Charts */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
+  /* Sidebar */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -78,6 +89,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Border radius */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -87,100 +99,165 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
 :root {
-  /* Surfaces — cool white page, white cards. */
-  --background: oklch(0.992 0.003 250);
-  --foreground: oklch(0.20 0.03 255);
+  /* -------------------------------------------------------
+     Surfaces
+     ------------------------------------------------------- */
+
+  --background: oklch(0.992 0.003 285);
+  --foreground: oklch(0.20 0.03 285);
+
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.20 0.03 255);
+  --card-foreground: oklch(0.20 0.03 285);
+
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.20 0.03 255);
+  --popover-foreground: oklch(0.20 0.03 285);
 
-  /* Primary — deep navy blue: trustworthy, professional, charitable. */
-  --primary: oklch(0.38 0.14 255);
-  --primary-foreground: oklch(0.985 0.005 255);
+  /* -------------------------------------------------------
+     Primary — Deep Purple
+     ------------------------------------------------------- */
 
-  /* Secondary — very light blue for subtle backgrounds. */
-  --secondary: oklch(0.965 0.015 250);
-  --secondary-foreground: oklch(0.32 0.03 255);
+  --primary: oklch(0.30 0.12 285);
+  --primary-foreground: oklch(0.985 0.005 285);
 
-  /* Muted — light blue-gray for subtle content. */
-  --muted: oklch(0.96 0.012 250);
-  --muted-foreground: oklch(0.42 0.02 250);
+  /* -------------------------------------------------------
+     Brand Gradient
+     ------------------------------------------------------- */
 
-  /* Accent — sky blue for highlights and selected states. */
-  --accent: oklch(0.62 0.15 235);
-  --accent-foreground: oklch(0.985 0.005 235);
+  --gradient-primary: linear-gradient(90deg,
+      #241653 0%,
+      #37256f 35%,
+      #4b2f82 70%,
+      #60408a 100%);
+
+  /* -------------------------------------------------------
+     Secondary — Very Light Purple
+     ------------------------------------------------------- */
+
+  --secondary: oklch(0.965 0.012 285);
+  --secondary-foreground: oklch(0.30 0.04 285);
+
+  /* -------------------------------------------------------
+     Muted
+     ------------------------------------------------------- */
+
+  --muted: oklch(0.96 0.012 285);
+  --muted-foreground: oklch(0.42 0.02 285);
+
+  /* -------------------------------------------------------
+     Accent — Purple
+     ------------------------------------------------------- */
+
+  --accent: oklch(0.50 0.15 285);
+  --accent-foreground: oklch(0.985 0.005 285);
+
+  /* -------------------------------------------------------
+     Destructive
+     ------------------------------------------------------- */
 
   --destructive: oklch(0.55 0.19 25);
   --destructive-foreground: oklch(0.985 0.005 25);
 
-  /*
-   * --border for decorative dividers (WCAG 1.4.11 exempt).
-   * --input for form controls (must clear 3:1 against background).
-   * --ring for focus indicators.
-   */
-  --border: oklch(0.90 0.012 250);
-  --input: oklch(0.55 0.018 250);
-  --ring: oklch(0.48 0.14 245);
+  /* -------------------------------------------------------
+     Borders / Inputs / Focus
+     ------------------------------------------------------- */
 
-  --chart-1: oklch(0.42 0.14 255);
-  --chart-2: oklch(0.52 0.12 220);
-  --chart-3: oklch(0.62 0.15 190);
-  --chart-4: oklch(0.58 0.12 155);
-  --chart-5: oklch(0.5 0.1 280);
+  --border: oklch(0.90 0.012 285);
+  --input: oklch(0.55 0.018 285);
+  --ring: oklch(0.48 0.14 285);
+
+  /* -------------------------------------------------------
+     Charts
+     ------------------------------------------------------- */
+
+  --chart-1: oklch(0.36 0.14 285);
+  --chart-2: oklch(0.46 0.13 300);
+  --chart-3: oklch(0.56 0.15 320);
+  --chart-4: oklch(0.58 0.12 260);
+  --chart-5: oklch(0.50 0.10 330);
+
+  /* -------------------------------------------------------
+     Radius
+     ------------------------------------------------------- */
 
   --radius: 0.625rem;
 
-  --sidebar: oklch(0.985 0.003 250);
-  --sidebar-foreground: oklch(0.20 0.03 255);
-  --sidebar-primary: oklch(0.38 0.14 255);
-  --sidebar-primary-foreground: oklch(0.985 0.005 255);
-  --sidebar-accent: oklch(0.965 0.015 250);
-  --sidebar-accent-foreground: oklch(0.32 0.03 255);
-  --sidebar-border: oklch(0.90 0.012 250);
-  --sidebar-ring: oklch(0.48 0.14 245);
+  /* -------------------------------------------------------
+     Sidebar
+     ------------------------------------------------------- */
+
+  --sidebar: oklch(0.985 0.003 285);
+  --sidebar-foreground: oklch(0.20 0.03 285);
+
+  --sidebar-primary: oklch(0.30 0.12 285);
+  --sidebar-primary-foreground: oklch(0.985 0.005 285);
+
+  --sidebar-accent: oklch(0.965 0.012 285);
+  --sidebar-accent-foreground: oklch(0.30 0.04 285);
+
+  --sidebar-border: oklch(0.90 0.012 285);
+  --sidebar-ring: oklch(0.48 0.14 285);
 }
 
-/*
- * Dark palette is retained for shadcn component compatibility. The `.dark`
- * class is not applied anywhere in Phase 1, so these values stay inactive.
- * Updated to be coherent with the new blue palette.
- */
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
 .dark {
-  --background: oklch(0.16 0.02 255);
-  --foreground: oklch(0.985 0.005 255);
-  --card: oklch(0.20 0.02 255);
-  --card-foreground: oklch(0.985 0.005 255);
-  --popover: oklch(0.20 0.02 255);
-  --popover-foreground: oklch(0.985 0.005 255);
-  --primary: oklch(0.58 0.14 255);
-  --primary-foreground: oklch(0.16 0.02 255);
-  --secondary: oklch(0.28 0.02 250);
-  --secondary-foreground: oklch(0.985 0.005 250);
-  --muted: oklch(0.25 0.02 250);
-  --muted-foreground: oklch(0.72 0.015 250);
-  --accent: oklch(0.55 0.15 235);
-  --accent-foreground: oklch(0.16 0.02 235);
+  --background: oklch(0.16 0.02 285);
+  --foreground: oklch(0.985 0.005 285);
+
+  --card: oklch(0.20 0.02 285);
+  --card-foreground: oklch(0.985 0.005 285);
+
+  --popover: oklch(0.20 0.02 285);
+  --popover-foreground: oklch(0.985 0.005 285);
+
+  --primary: oklch(0.58 0.14 285);
+  --primary-foreground: oklch(0.16 0.02 285);
+
+  --secondary: oklch(0.28 0.02 285);
+  --secondary-foreground: oklch(0.985 0.005 285);
+
+  --muted: oklch(0.25 0.02 285);
+  --muted-foreground: oklch(0.72 0.015 285);
+
+  --accent: oklch(0.55 0.15 285);
+  --accent-foreground: oklch(0.16 0.02 285);
+
   --destructive: oklch(0.68 0.18 25);
   --destructive-foreground: oklch(0.985 0.005 25);
+
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.58 0.14 255);
-  --chart-1: oklch(0.52 0.14 255);
-  --chart-2: oklch(0.6 0.12 220);
-  --chart-3: oklch(0.68 0.15 190);
-  --chart-4: oklch(0.65 0.12 155);
-  --chart-5: oklch(0.58 0.1 280);
-  --sidebar: oklch(0.18 0.02 255);
-  --sidebar-foreground: oklch(0.985 0.005 255);
-  --sidebar-primary: oklch(0.58 0.14 255);
-  --sidebar-primary-foreground: oklch(0.16 0.02 255);
-  --sidebar-accent: oklch(0.28 0.02 250);
-  --sidebar-accent-foreground: oklch(0.985 0.005 250);
+  --ring: oklch(0.58 0.14 285);
+
+  --chart-1: oklch(0.52 0.14 285);
+  --chart-2: oklch(0.60 0.13 300);
+  --chart-3: oklch(0.68 0.15 320);
+  --chart-4: oklch(0.65 0.12 260);
+  --chart-5: oklch(0.58 0.10 330);
+
+  --sidebar: oklch(0.18 0.02 285);
+  --sidebar-foreground: oklch(0.985 0.005 285);
+
+  --sidebar-primary: oklch(0.58 0.14 285);
+  --sidebar-primary-foreground: oklch(0.16 0.02 285);
+
+  --sidebar-accent: oklch(0.28 0.02 285);
+  --sidebar-accent-foreground: oklch(0.985 0.005 285);
+
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.58 0.14 255);
+  --sidebar-ring: oklch(0.58 0.14 285);
 }
+
+/* =========================================================
+   BASE
+   ========================================================= */
 
 @layer base {
   * {
@@ -199,10 +276,9 @@
 
   /*
    * Tailwind's preflight resets headings to inherit body size and weight.
-   * These defaults restore a correct, accessible hierarchy site-wide so that
-   * individual pages cannot accidentally ship an unstyled or flat heading.
-   * Individual headings can still be overridden with utility classes.
+   * These defaults restore a correct accessible hierarchy site-wide.
    */
+
   h1,
   h2,
   h3,
@@ -234,16 +310,20 @@
   }
 
   /*
-   * Visible keyboard focus for every focusable element. shadcn controls
-   * supply their own ring and opt out via `outline-none`, so this rule
-   * covers links and any element without a bespoke focus treatment.
+   * Visible keyboard focus.
    */
+
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
+  /*
+   * Reduced motion accessibility.
+   */
+
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -254,16 +334,16 @@
     }
   }
 
-  /*
-   * Scroll Reveal Animations
-   * Subtle fade + translateY reveal for homepage sections.
-   * Respects prefers-reduced-motion via the rule above.
-   * Progressive enhancement: only animates when .js class is present on <html>
-   */
+  /* =======================================================
+     SCROLL REVEAL ANIMATIONS
+     ======================================================= */
+
   .js .scroll-reveal {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 600ms ease-out, transform 600ms ease-out;
+    transition:
+      opacity 600ms ease-out,
+      transform 600ms ease-out;
   }
 
   .js .scroll-reveal.is-visible {
@@ -274,26 +354,20 @@
   .js .scroll-reveal-delay-1 {
     transition-delay: 80ms;
   }
+
   .js .scroll-reveal-delay-2 {
     transition-delay: 160ms;
   }
+
   .js .scroll-reveal-delay-3 {
     transition-delay: 240ms;
   }
+
   .js .scroll-reveal-delay-4 {
     transition-delay: 320ms;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-
     .js .scroll-reveal {
       opacity: 1 !important;
       transform: none !important;

@@ -35,7 +35,7 @@ const programs: Program[] = [
     ],
     dedicatedRoute: "/family-support",
     status: "active",
-    image: null,
+    image: "/images/family-support.jpeg",
   },
   {
     slug: "community-programs",
@@ -53,7 +53,7 @@ const programs: Program[] = [
     ],
     dedicatedRoute: null,
     status: "active",
-    image: null,
+    image: "/images/community-programs.jpeg",
   },
   {
     slug: "volunteer-program",
@@ -69,7 +69,7 @@ const programs: Program[] = [
     ],
     dedicatedRoute: "/volunteer",
     status: "active",
-    image: null,
+    image: "/images/volunteer-program.jpeg",
   },
   {
     slug: "scholarships-grants",
@@ -80,8 +80,8 @@ const programs: Program[] = [
     description: null,
     activities: [],
     dedicatedRoute: "/scholarships",
-    status: "pending-details",
-    image: null,
+    status: "active",
+    image: "/images/scholarships-grants.jpeg",
   },
   {
     slug: "newcomer-refugee-support",
@@ -92,8 +92,8 @@ const programs: Program[] = [
     description: null,
     activities: [],
     dedicatedRoute: "/newcomer-refugee-support",
-    status: "pending-details",
-    image: null,
+    status: "active",
+    image: "/images/community-programs-2.jpeg",
   },
 ];
 

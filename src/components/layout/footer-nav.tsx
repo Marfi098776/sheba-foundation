@@ -15,9 +15,9 @@ export type FooterNavProps = {
  */
 export function FooterNav({ groups }: FooterNavProps) {
   return (
-    <nav aria-label="Footer" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <nav aria-label="Footer" className="contents">
       {groups.map((group) => (
-        <div key={group.key}>
+        <div key={group.key} className="min-w-0">
           <h2 className="text-sm font-semibold tracking-wide text-foreground uppercase">
             {group.title}
           </h2>
