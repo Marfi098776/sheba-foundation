@@ -30,7 +30,7 @@ const organization: OrganizationInfo = {
     {
       id: "mahmuda-mukty",
       name: "Dr. Mahmuda Mukty",
-      role: "Founder and Chairman/President",
+      role: "President",
       bio: null,
       photo: "/images/mahmuda-no-bg.png",
     },
@@ -39,7 +39,7 @@ const organization: OrganizationInfo = {
       name: "Mohammed Rashedul Alam",
       role: "Vice President",
       bio: null,
-      photo: "/images/lenin-no-bg.png",
+      photo: "/images/rashedul-no-bg.png",
     },
     {
       id: "ASM-Noorullah-Tarun-MD",
@@ -53,7 +53,7 @@ const organization: OrganizationInfo = {
       name: "Dr. Shahed Iqbal",
       role: "Treasurer",
       bio: null,
-      photo: "/images/dr-shahed.jpeg",
+      photo: "/images/shahed-no-bg (1).png",
     },
   ],
   foundingPatronsNote: "Major donors will be designated as Founding Patrons.",
