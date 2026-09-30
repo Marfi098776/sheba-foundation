@@ -32,7 +32,7 @@ function PersonCard({ name, role, bio, photo }: PersonProps) {
           ============================================================ */}
       <div className="relative flex h-72 items-end justify-center bg-transparent">
         {photo ? (
-          <div className="relative h-full w-full">
+          <div className="relative z-0 h-full w-full">
             {/* Hover shadow */}
             <div
               aria-hidden="true"
