@@ -9,6 +9,8 @@ import { SupportCta } from "@/components/sections/support-cta";
 import { ValuesPreview } from "@/components/sections/values-preview";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { generatePageMetadata } from "@/lib/seo";
+import { LeadershipSection } from "@/components/sections/people-sections";
+import { getOrganization } from "@/content/organization";
 
 /**
  * Homepage.
@@ -30,11 +32,15 @@ export const metadata: Metadata = generatePageMetadata({
   },
 });
 
-export default function Home() {
+export default async function Home() {
+  const organization = await getOrganization();
   return (
     <>
       <ScrollReveal>
         <Hero />
+      </ScrollReveal>
+      <ScrollReveal delay={80}>
+        <LeadershipSection leadership={organization.leadership} />
       </ScrollReveal>
       <ScrollReveal delay={80}>
         <Mission />

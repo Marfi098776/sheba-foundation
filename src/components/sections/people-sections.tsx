@@ -20,38 +20,92 @@ export type PersonProps = {
   photo: string | null;
 };
 
+/**
+ * Soft purple ambient light behind a section.
+ * Purely decorative. Sits behind content (-z-10) inside an isolated section.
+ */
+function SectionGlow() {
+  return (
+    <>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 -top-32 -z-10 size-96 rounded-full bg-primary/15 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-40 -right-32 -z-10 size-[28rem] rounded-full bg-primary/10 blur-3xl"
+      />
+    </>
+  );
+}
+
+/** Icon inside a glowing ring, used for empty states. */
+function EmptyStateIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mx-auto flex size-20 items-center justify-center rounded-full border border-primary/25 bg-primary/10 shadow-[0_0_40px_-8px] shadow-primary/50">
+      {children}
+    </div>
+  );
+}
+
 function PersonCard({ name, role, bio, photo }: PersonProps) {
   const hasName = !!name && name !== "[CLIENT TO PROVIDE]";
 
   return (
-    <div className="group">
+    <div className="group h-full">
       {/* ============================================================
           PERSON IMAGE
           NOT INSIDE THE CARD
-          Transparent PNG sits directly on the section background.
+          Transparent PNG sits directly on the section background,
+          framed by a soft purple arch and glow.
           ============================================================ */}
       <div className="relative flex h-72 items-end justify-center bg-transparent">
+        {/* Arch frame behind the person */}
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            inset-x-8
+            bottom-0
+            top-6
+            rounded-t-full
+            border
+            border-b-0
+            border-primary/20
+            bg-gradient-to-t
+            from-primary/25
+            via-primary/10
+            to-transparent
+            transition-colors
+            duration-500
+            group-hover:border-primary/40
+            motion-reduce:transition-none
+          "
+        />
+
         {photo ? (
           <div className="relative z-0 h-full w-full">
-            {/* Hover shadow */}
+            {/* Floor glow */}
             <div
               aria-hidden="true"
               className="
-          pointer-events-none
-          absolute
-          bottom-2
-          left-1/2
-          h-20
-          w-40
-          -translate-x-1/2
-          rounded-full
-          bg-black/20
-          opacity-0
-          blur-2xl
-          transition-opacity
-          duration-500
-          group-hover:opacity-100
-        "
+                pointer-events-none
+                absolute
+                bottom-2
+                left-1/2
+                h-20
+                w-44
+                -translate-x-1/2
+                rounded-full
+                bg-primary/40
+                opacity-40
+                blur-2xl
+                transition-opacity
+                duration-500
+                group-hover:opacity-90
+                motion-reduce:transition-none
+              "
             />
 
             <Image
@@ -60,31 +114,41 @@ function PersonCard({ name, role, bio, photo }: PersonProps) {
               width={809}
               height={774}
               className="
-          relative
-          z-10
-          mx-auto
-          h-full
-          w-auto
-          object-contain
-          object-bottom
-          transition-transform
-          duration-500
-          group-hover:scale-[1.03]
-        "
+                relative
+                z-10
+                mx-auto
+                h-full
+                w-auto
+                object-contain
+                object-bottom
+                drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)]
+                transition-transform
+                duration-500
+                group-hover:scale-[1.03]
+                motion-reduce:transform-none
+                motion-reduce:transition-none
+              "
             />
           </div>
         ) : (
           <div
             className="
-        mb-6
-        flex
-        size-40
-        items-center
-        justify-center
-        rounded-full
-        bg-muted
-        text-muted-foreground/40
-      "
+              relative
+              mb-6
+              flex
+              size-40
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-primary/25
+              bg-gradient-to-br
+              from-primary/20
+              to-muted
+              text-primary/50
+              shadow-[0_0_48px_-10px]
+              shadow-primary/50
+            "
           >
             <User className="size-16" aria-hidden="true" />
           </div>
@@ -102,14 +166,26 @@ function PersonCard({ name, role, bio, photo }: PersonProps) {
           min-h-52
           overflow-hidden
           rounded-t-none
-          border-border/70
-          bg-background
-          shadow-sm
+          border-primary/20
+          bg-gradient-to-b
+          from-primary/10
+          to-background
+          shadow-lg
+          shadow-primary/5
           transition-all
           duration-300
+          group-hover:border-primary/40
           group-hover:shadow-xl
+          group-hover:shadow-primary/20
+          motion-reduce:transition-none
         "
       >
+        {/* Accent line along the top edge */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+        />
+
         <CardContent className="flex min-h-52 flex-col px-6 py-7 text-center">
           {/* Name */}
           <h3
@@ -118,6 +194,7 @@ function PersonCard({ name, role, bio, photo }: PersonProps) {
               text-xl
               font-semibold
               leading-snug
+              tracking-tight
               text-foreground
             "
           >
@@ -131,18 +208,39 @@ function PersonCard({ name, role, bio, photo }: PersonProps) {
           </h3>
 
           {/* Role */}
-          <p className="mt-1 text-sm font-medium text-primary">
+          <p
+            className="
+              mx-auto
+              mt-3
+              w-fit
+              rounded-full
+              border
+              border-primary/30
+              bg-primary/10
+              px-3.5
+              py-1
+              text-xs
+              font-medium
+              text-primary
+            "
+          >
             {role}
           </p>
 
+          {/* Divider */}
+          <div
+            aria-hidden="true"
+            className="mx-auto mt-5 h-px w-12 bg-gradient-to-r from-transparent via-primary/60 to-transparent"
+          />
+
           {/* Biography */}
-          <div className="mt-4 flex-1">
+          <div className="mt-5 flex-1">
             {bio ? (
               <p className="text-sm leading-relaxed text-muted-foreground">
                 {bio}
               </p>
             ) : (
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm italic leading-relaxed text-muted-foreground/80">
                 Biography to be provided by the Foundation.
               </p>
             )}
@@ -187,27 +285,35 @@ export function PeopleSection({
     return (
       <Section
         tone="subtle"
-        className="border-y border-border"
+        className="relative isolate overflow-hidden border-y border-primary/20"
       >
+        <SectionGlow />
         <Container>
           <SectionHeading
             title={title}
             description={description}
           />
 
-          <div className="mt-10 rounded-xl border border-border bg-muted p-8 text-center sm:p-10">
+          <div className="relative mt-10 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-muted to-muted p-8 text-center shadow-lg shadow-primary/5 sm:p-12">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+            />
+
             {Icon && (
-              <Icon
-                className="mx-auto size-12 text-primary/30"
-                aria-hidden="true"
-              />
+              <EmptyStateIcon>
+                <Icon
+                  className="size-9 text-primary"
+                  aria-hidden="true"
+                />
+              </EmptyStateIcon>
             )}
 
-            <h3 className="mt-4 font-heading text-h4 font-semibold">
+            <h3 className="mt-6 font-heading text-h4 font-semibold text-foreground">
               {emptyMessage ?? "Information coming soon"}
             </h3>
 
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+            <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">
               {description ??
                 "The Canadian Sheba Foundation has not yet published details for this section. It will be updated once approved materials are supplied."}
             </p>
@@ -220,15 +326,16 @@ export function PeopleSection({
   return (
     <Section
       tone="subtle"
-      className="border-y border-border"
+      className="relative isolate overflow-hidden border-y border-primary/20"
     >
+      <SectionGlow />
       <Container>
         <SectionHeading
           title={title}
           description={description}
         />
 
-        <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {people
             .filter(
               (p) =>
@@ -286,8 +393,9 @@ export function VolunteersSection({
   return (
     <Section
       tone="subtle"
-      className="border-y border-border"
+      className="relative isolate overflow-hidden border-y border-primary/20"
     >
+      <SectionGlow />
       <Container>
         <SectionHeading
           title="Volunteers"
@@ -297,17 +405,24 @@ export function VolunteersSection({
           }
         />
 
-        <div className="mt-10 rounded-xl border border-border bg-muted p-8 text-center sm:p-10">
-          <ImageIcon
-            className="mx-auto size-12 text-primary/30"
+        <div className="relative mt-10 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-muted to-muted p-8 text-center shadow-lg shadow-primary/5 sm:p-12">
+          <div
             aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
           />
 
-          <h3 className="mt-4 font-heading text-h4 font-semibold">
+          <EmptyStateIcon>
+            <ImageIcon
+              className="size-9 text-primary"
+              aria-hidden="true"
+            />
+          </EmptyStateIcon>
+
+          <h3 className="mt-6 font-heading text-h4 font-semibold text-foreground">
             Volunteer profiles coming soon
           </h3>
 
-          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+          <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">
             The Foundation has not yet published volunteer
             profiles. They will appear here once approved
             materials are supplied.
@@ -316,20 +431,41 @@ export function VolunteersSection({
 
         {(volunteers.opportunities.length > 0 ||
           volunteers.registrationAvailable) && (
-            <div className="mt-10 max-w-2xl">
-              <h3 className="font-heading text-h4 font-semibold">
+            <div className="mt-12 max-w-2xl">
+              <h3 className="flex items-center gap-3 font-heading text-h4 font-semibold text-foreground">
+                <span
+                  aria-hidden="true"
+                  className="h-6 w-1 rounded-full bg-gradient-to-b from-primary to-primary/30"
+                />
                 Current volunteer opportunities
               </h3>
 
-              <ul className="mt-4 flex flex-col gap-2">
+              <ul className="mt-5 flex flex-col gap-3">
                 {volunteers.opportunities.map((opp) => (
                   <li
                     key={opp}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
+                    className="
+                      flex
+                      items-center
+                      gap-3
+                      rounded-lg
+                      border
+                      border-primary/15
+                      bg-primary/5
+                      px-4
+                      py-3
+                      text-sm
+                      text-foreground/80
+                      transition-colors
+                      duration-200
+                      hover:border-primary/35
+                      hover:bg-primary/10
+                      motion-reduce:transition-none
+                    "
                   >
                     <span
                       aria-hidden="true"
-                      className="size-1.5 shrink-0 rounded-full bg-primary"
+                      className="size-2 shrink-0 rounded-full bg-primary shadow-[0_0_10px] shadow-primary"
                     />
                     {opp}
                   </li>
@@ -338,11 +474,12 @@ export function VolunteersSection({
 
               {volunteers.registrationAvailable &&
                 volunteers.registrationUrl && (
-                  <div className="mt-6">
+                  <div className="mt-8">
                     <Button
                       asChild
                       variant="default"
                       size="lg"
+                      className="shadow-lg shadow-primary/30 transition-shadow hover:shadow-xl hover:shadow-primary/40"
                     >
                       <a
                         href={volunteers.registrationUrl}
@@ -360,12 +497,12 @@ export function VolunteersSection({
                 )}
 
               {!volunteers.registrationAvailable && (
-                <p className="mt-4 text-sm text-muted-foreground">
+                <p className="mt-5 rounded-lg border border-border/60 bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
                   Volunteer registration is not currently
                   available. Please check back later or{" "}
                   <a
                     href="/contact"
-                    className="text-primary hover:underline"
+                    className="font-medium text-primary underline-offset-4 hover:underline"
                   >
                     contact us
                   </a>{" "}
