@@ -44,7 +44,7 @@ const organization: OrganizationInfo = {
     {
       id: "mahmudul-mannan",
       name: "Dr. Mahmudul Mannan",
-      role: "Secretary",
+      role: "program director",
       bio: null,
       photo: "/images/mahmudul-mannan.png",
     },
@@ -58,9 +58,16 @@ const organization: OrganizationInfo = {
     {
       id: "shahed-iqbal",
       name: "Dr. Shahed Iqbal",
-      role: "Treasurer",
+      role: "Finance officer",
       bio: null,
       photo: "/images/shahed-bg.png",
+    },
+    {
+      id: "shamsul-abedin",
+      name: "Dr. Shamsul Abedin",
+      role: "Fund raising Director",
+      bio: null,
+      photo: null,
     },
   ],
   foundingPatronsNote: "Major donors will be designated as Founding Patrons.",

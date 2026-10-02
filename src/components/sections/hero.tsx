@@ -27,21 +27,10 @@ export async function Hero() {
   const hasPhoto = Boolean(heroImage.src && heroImage.alt);
 
   return (
-    <Section
-      size="tall"
-      className="relative isolate overflow-hidden"
-    >
-      {/* ================================================================
-          BACKGROUND IMAGE
-          ================================================================ */}
+    <Section size="tall" className="relative isolate overflow-hidden">
+      {/* ===== BACKGROUND IMAGE ====================== */}
       {hasPhoto ? (
-        <Image
-          src="/images/hero.jpeg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
+        <Image src="/images/hero.jpeg" alt="Hero background" fill priority sizes="100vw" className="object-cover object-center"
         />
       ) : (
         <div
@@ -241,70 +230,68 @@ export async function Hero() {
           ============================================================ */}
           <div className="lg:col-span-5">
             <ScrollReveal delay={160}>
-              <div
-                className="
-                  relative
-                  mx-auto
-                  w-full
-                  max-w-xl
-                  overflow-hidden
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-black/20
-                  shadow-2xl
-                  backdrop-blur-sm
-                  transition-all
-                  duration-500
-                  hover:-translate-y-1
-                  hover:shadow-[0_25px_60px_rgba(0,0,0,0.35)]
-                "
-              >
-                <div className="lg:col-span-5">
-                  <ScrollReveal delay={160}>
-                    <div
-                      className=" relative mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-white/20 bg-black/20 shadow-2xl  backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_rgba(0,0,0,0.35)]
-      "
-                    >
-                      <video
-                        className=" block aspect-[9/16] w-full object-cover "
-                        autoPlay
-                        loop
-                        playsInline
-                        controls
-                        preload="metadata"
-                        aria-label="Canadian Sheba Foundation introduction"
-                      >
-                        <source
-                          src="/videos/cad2.mp4"
-                          type="video/mp4"
-                        />
+              <div className="relative mx-auto w-full max-w-[360px]">
 
-                        Your browser does not support the video element.
-                      </video>
-
-                      {/* Subtle overlay */}
-                      <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0  bg-gradient-to-t from-black/20 via-transparent to-white/5"
-                      />
-                    </div>
-                  </ScrollReveal>
-                </div>
-
-                {/* Subtle video overlay */}
+                {/* Shadow behind the video */}
                 <div
                   aria-hidden="true"
                   className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/20
-                    via-transparent
-                    to-white/5
-                  "
+          absolute
+          inset-4
+          rounded-[2rem]
+          bg-[#21164f]/60
+          blur-2xl
+          scale-105
+        "
                 />
+
+                {/* Video */}
+                <div
+                  className="
+          relative
+          aspect-[9/16]
+          overflow-hidden
+          rounded-2xl
+          shadow-2xl
+          transition-all
+          duration-500
+          hover:-translate-y-1
+          hover:shadow-[0_25px_60px_rgba(0,0,0,0.35)]
+        "
+                >
+                  <video
+                    className="block h-full w-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    preload="metadata"
+                    aria-label="Canadian Sheba Foundation introduction"
+                  >
+                    <source
+                      src="/videos/cad2.mp4"
+                      type="video/mp4"
+                    />
+
+                    Your browser does not support the video element.
+                  </video>
+
+                  {/* Subtle video overlay */}
+                  <div
+                    aria-hidden="true"
+                    className="
+            pointer-events-none
+            absolute
+            inset-0
+            bg-gradient-to-t
+            from-black/20
+            via-transparent
+            to-white/5
+          "
+                  />
+                </div>
+
               </div>
             </ScrollReveal>
           </div>
