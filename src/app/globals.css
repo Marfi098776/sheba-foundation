@@ -334,6 +334,41 @@
     }
   }
 
+
+  /* Leadership marquee */
+  @keyframes leadership-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .leadership-marquee {
+    display: flex;
+    width: max-content;
+    animation: leadership-marquee 30s linear infinite;
+  }
+
+  .leadership-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .leadership-marquee-track {
+    display: flex;
+    gap: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .leadership-marquee {
+      animation: none;
+      transform: none;
+    }
+  }
+
   /* =======================================================
      SCROLL REVEAL ANIMATIONS
      ======================================================= */

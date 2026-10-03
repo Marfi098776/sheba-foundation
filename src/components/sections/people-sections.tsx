@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Container } from "@/components/shared/container";
 import { Section } from "@/components/shared/section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   User,
@@ -20,236 +19,172 @@ export type PersonProps = {
   photo: string | null;
 };
 
-/**
- * Soft purple ambient light behind a section.
- * Purely decorative. Sits behind content (-z-10) inside an isolated section.
- */
-function SectionGlow() {
-  return (
-    <>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-32 -top-32 -z-10 size-96 rounded-full bg-primary/15 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 -right-32 -z-10 size-[28rem] rounded-full bg-primary/10 blur-3xl"
-      />
-    </>
-  );
-}
-
-/** Icon inside a glowing ring, used for empty states. */
-function EmptyStateIcon({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mx-auto flex size-20 items-center justify-center rounded-full border border-primary/25 bg-primary/10 shadow-[0_0_40px_-8px] shadow-primary/50">
-      {children}
-    </div>
-  );
-}
+/* -------------------------------------------------------------------------- */
+/* Person Card                                                                */
+/* -------------------------------------------------------------------------- */
 
 function PersonCard({ name, role, bio, photo }: PersonProps) {
   const hasName = !!name && name !== "[CLIENT TO PROVIDE]";
 
   return (
-    <div className="group h-full">
-      {/* ============================================================
-          PERSON IMAGE
-          NOT INSIDE THE CARD
-          Transparent PNG sits directly on the section background,
-          framed by a soft purple arch and glow.
-          ============================================================ */}
-      <div className="relative flex h-72 items-end justify-center bg-transparent">
-        {/* Arch frame behind the person */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-x-8
-            bottom-0
-            top-6
-            rounded-t-full
-            border
-            border-b-0
-            border-primary/20
-            bg-gradient-to-t
-            from-primary/25
-            via-primary/10
-            to-transparent
-            transition-colors
-            duration-500
-            group-hover:border-primary/40
-            motion-reduce:transition-none
-          "
-        />
+    <article
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-2xl
+        border
+        border-[#4a2a82]/15
+        bg-white
+        shadow-sm
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:shadow-[0_18px_45px_rgba(74,42,130,0.18)]
+      "
+    >
+      {/* ------------------------------------------------------------------ */}
+      {/* Portrait                                                           */}
+      {/* ------------------------------------------------------------------ */}
 
+      <div
+        className="
+          relative
+          aspect-square
+          w-full
+          overflow-hidden
+          rounded-t-2xl
+          bg-[#f3eff9]
+        "
+      >
         {photo ? (
-          <div className="relative z-0 h-full w-full">
-            {/* Floor glow */}
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none
-                absolute
-                bottom-2
-                left-1/2
-                h-20
-                w-44
-                -translate-x-1/2
-                rounded-full
-                bg-primary/40
-                opacity-40
-                blur-2xl
-                transition-opacity
-                duration-500
-                group-hover:opacity-90
-                motion-reduce:transition-none
-              "
-            />
-
+          <div
+            className="
+              absolute
+              inset-0
+              flex
+              items-end
+              justify-center
+              transition-all
+              duration-500
+              ease-out
+              group-hover:scale-[1.04]
+            "
+          >
             <Image
               src={photo}
-              alt={hasName ? `Portrait of ${name}` : "Portrait"}
-              width={809}
-              height={774}
+              alt={hasName ? `Portrait of ${name}` : ""}
+              fill
+              sizes="
+                (min-width: 1024px) 30vw,
+                (min-width: 640px) 45vw,
+                100vw
+              "
               className="
-                relative
-                z-10
-                mx-auto
-                h-full
-                w-auto
-                object-contain
-                object-bottom
-                drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)]
-                transition-transform
-                duration-500
-                group-hover:scale-[1.03]
-                motion-reduce:transform-none
-                motion-reduce:transition-none
+                object-cover
+                object-top
               "
             />
           </div>
         ) : (
           <div
             className="
-              relative
-              mb-6
+              absolute
+              inset-0
               flex
-              size-40
               items-center
               justify-center
-              rounded-full
-              border
-              border-primary/25
-              bg-gradient-to-br
-              from-primary/20
-              to-muted
-              text-primary/50
-              shadow-[0_0_48px_-10px]
-              shadow-primary/50
+              bg-[#f3eff9]
             "
           >
-            <User className="size-16" aria-hidden="true" />
+            <User
+              className="size-16 text-[#4a2a82]/25"
+              aria-hidden="true"
+            />
           </div>
         )}
-      </div>
 
-      {/* ============================================================
-          INFORMATION CARD
-          The card begins BELOW the person's image.
-          ============================================================ */}
-      <Card
-        className="
-          relative
-          -mt-px
-          min-h-52
-          overflow-hidden
-          rounded-t-none
-          border-primary/20
-          bg-gradient-to-b
-          from-primary/10
-          to-background
-          shadow-lg
-          shadow-primary/5
-          transition-all
-          duration-300
-          group-hover:border-primary/40
-          group-hover:shadow-xl
-          group-hover:shadow-primary/20
-          motion-reduce:transition-none
-        "
-      >
-        {/* Accent line along the top edge */}
+        {/* Purple image shadow / glow */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            opacity-0
+            shadow-[inset_0_-30px_45px_rgba(74,42,130,0.12)]
+            transition-opacity
+            duration-300
+            group-hover:opacity-100
+          "
         />
+      </div>
 
-        <CardContent className="flex min-h-52 flex-col px-6 py-7 text-center">
-          {/* Name */}
-          <h3
-            className="
-              font-heading
-              text-xl
-              font-semibold
-              leading-snug
-              tracking-tight
-              text-foreground
-            "
-          >
-            {hasName ? (
-              name
-            ) : (
-              <span className="text-muted-foreground">
-                Name to be confirmed
-              </span>
-            )}
-          </h3>
+      {/* ------------------------------------------------------------------ */}
+      {/* Information                                                        */}
+      {/* ------------------------------------------------------------------ */}
 
-          {/* Role */}
-          <p
-            className="
-              mx-auto
-              mt-3
-              w-fit
-              rounded-full
-              border
-              border-primary/30
-              bg-primary/10
-              px-3.5
-              py-1
-              text-xs
-              font-medium
-              text-primary
-            "
-          >
-            {role}
-          </p>
+      <div
+        className="
+          relative
+          z-10
+          bg-white
+          px-5
+          py-5
+          text-center
+        "
+      >
+        {/* Name */}
+        <h3
+          className="
+            font-heading
+            text-lg
+            font-semibold
+            leading-tight
+            text-[#21164f]
+          "
+        >
+          {hasName ? (
+            name
+          ) : (
+            <span className="text-muted-foreground">
+              Name to be confirmed
+            </span>
+          )}
+        </h3>
 
-          {/* Divider */}
-          <div
-            aria-hidden="true"
-            className="mx-auto mt-5 h-px w-12 bg-gradient-to-r from-transparent via-primary/60 to-transparent"
-          />
+        {/* Role */}
+        <p
+          className="
+            mt-1.5
+            text-sm
+            font-medium
+            text-[#5b3a8f]
+          "
+        >
+          {role}
+        </p>
 
-          {/* Biography */}
-          <div className="mt-5 flex-1">
-            {bio ? (
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {bio}
-              </p>
-            ) : (
-              <p className="text-sm italic leading-relaxed text-muted-foreground/80">
-                Biography to be provided by the Foundation.
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+        {/* Biography */}
+        <div className="mt-4 min-h-[48px]">
+          {bio ? (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {bio}
+            </p>
+          ) : (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Biography to be provided by the Foundation.
+            </p>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Generic People Section                                                    */
+/* -------------------------------------------------------------------------- */
 
 export type PeopleSectionProps = {
   title: string;
@@ -260,60 +195,66 @@ export type PeopleSectionProps = {
     className?: string;
     ariaHidden?: boolean;
   }>;
+  marquee?: boolean;
 };
 
-/**
- * Generic section for displaying a group of people.
- *
- * Used for:
- * - Board
- * - Leadership
- * - Other people-based sections
- */
 export function PeopleSection({
   title,
   description,
   people,
   emptyMessage,
   icon: Icon,
+  marquee = false,
 }: PeopleSectionProps) {
   const hasConfirmedPeople = people.some(
-    (p) => !!p.name && p.name !== "[CLIENT TO PROVIDE]"
+    (p) => !!p.name && p.name !== "[CLIENT TO PROVIDE]",
   );
+
+  /* ---------------------------------------------------------------------- */
+  /* Empty state                                                            */
+  /* ---------------------------------------------------------------------- */
 
   if (!hasConfirmedPeople) {
     return (
-      <Section
-        tone="subtle"
-        className="relative isolate overflow-hidden border-y border-primary/20"
-      >
-        <SectionGlow />
+      <Section tone="subtle" className="border-y border-border">
         <Container>
           <SectionHeading
             title={title}
             description={description}
           />
 
-          <div className="relative mt-10 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-muted to-muted p-8 text-center shadow-lg shadow-primary/5 sm:p-12">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
-            />
-
+          <div
+            className="
+              mt-10
+              rounded-2xl
+              border
+              border-[#4a2a82]/10
+              bg-[#f7f4fb]
+              p-8
+              text-center
+              sm:p-10
+            "
+          >
             {Icon && (
-              <EmptyStateIcon>
-                <Icon
-                  className="size-9 text-primary"
-                  aria-hidden="true"
-                />
-              </EmptyStateIcon>
+              <Icon
+                className="mx-auto size-12 text-[#4a2a82]/30"
+                aria-hidden="true"
+              />
             )}
 
-            <h3 className="mt-6 font-heading text-h4 font-semibold text-foreground">
+            <h3
+              className="
+                mt-4
+                font-heading
+                text-h4
+                font-semibold
+                text-[#21164f]
+              "
+            >
               {emptyMessage ?? "Information coming soon"}
             </h3>
 
-            <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
               {description ??
                 "The Canadian Sheba Foundation has not yet published details for this section. It will be updated once approved materials are supplied."}
             </p>
@@ -323,35 +264,135 @@ export function PeopleSection({
     );
   }
 
+  /* ---------------------------------------------------------------------- */
+  /* People                                                                  */
+  /* ---------------------------------------------------------------------- */
+
   return (
-    <Section
-      tone="subtle"
-      className="relative isolate overflow-hidden border-y border-primary/20"
-    >
-      <SectionGlow />
+    <Section tone="subtle" className="border-y border-border">
       <Container>
         <SectionHeading
           title={title}
           description={description}
         />
 
-        <ul className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {people
-            .filter(
-              (p) =>
-                !!p.name &&
-                p.name !== "[CLIENT TO PROVIDE]"
-            )
-            .map((person) => (
-              <li key={person.name ?? person.role}>
-                <PersonCard {...person} />
-              </li>
-            ))}
-        </ul>
+        {marquee ? (
+          <div
+            className="
+      relative
+      mt-10
+      overflow-hidden
+      py-2
+    "
+          >
+            {/* Left fade */}
+            <div
+              aria-hidden="true"
+              className="
+        pointer-events-none
+        absolute
+        inset-y-0
+        left-0
+        z-20
+        w-20
+        bg-gradient-to-r
+        from-[#f7f4fb]
+        to-transparent
+      "
+            />
+
+            {/* Right fade */}
+            <div
+              aria-hidden="true"
+              className="
+        pointer-events-none
+        absolute
+        inset-y-0
+        right-0
+        z-20
+        w-20
+        bg-gradient-to-l
+        from-[#f7f4fb]
+        to-transparent
+      "
+            />
+
+            <div className="leadership-marquee">
+              {/* First copy */}
+              <ul className="leadership-marquee-track">
+                {people
+                  .filter(
+                    (p) =>
+                      !!p.name &&
+                      p.name !== "[CLIENT TO PROVIDE]",
+                  )
+                  .map((person) => (
+                    <li
+                      key={`first-${person.name}-${person.role}`}
+                      className="w-[280px] shrink-0 sm:w-[300px]"
+                    >
+                      <PersonCard {...person} />
+                    </li>
+                  ))}
+              </ul>
+
+              {/* Duplicate copy for seamless loop */}
+              <ul
+                className="leadership-marquee-track"
+                aria-hidden="true"
+              >
+                {people
+                  .filter(
+                    (p) =>
+                      !!p.name &&
+                      p.name !== "[CLIENT TO PROVIDE]",
+                  )
+                  .map((person) => (
+                    <li
+                      key={`second-${person.name}-${person.role}`}
+                      className="w-[280px] shrink-0 sm:w-[300px]"
+                    >
+                      <PersonCard {...person} />
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <ul
+            className="
+      mt-10
+      grid
+      gap-7
+      sm:grid-cols-2
+      lg:grid-cols-3
+      xl:grid-cols-4
+    "
+          >
+            {people
+              .filter(
+                (p) =>
+                  !!p.name &&
+                  p.name !== "[CLIENT TO PROVIDE]",
+              )
+              .map((person) => (
+                <li
+                  key={`${person.name}-${person.role}`}
+                  className="h-full"
+                >
+                  <PersonCard {...person} />
+                </li>
+              ))}
+          </ul>
+        )}
       </Container>
     </Section>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Board                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export function BoardSection({
   board,
@@ -369,6 +410,10 @@ export function BoardSection({
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Leadership                                                                 */
+/* -------------------------------------------------------------------------- */
+
 export function LeadershipSection({
   leadership,
 }: {
@@ -381,9 +426,14 @@ export function LeadershipSection({
       people={leadership}
       emptyMessage="Leadership team to be confirmed"
       icon={Briefcase}
+      marquee
     />
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Volunteers                                                                 */
+/* -------------------------------------------------------------------------- */
 
 export function VolunteersSection({
   volunteers,
@@ -391,11 +441,7 @@ export function VolunteersSection({
   volunteers: VolunteerInfo;
 }) {
   return (
-    <Section
-      tone="subtle"
-      className="relative isolate overflow-hidden border-y border-primary/20"
-    >
-      <SectionGlow />
+    <Section tone="subtle" className="border-y border-border">
       <Container>
         <SectionHeading
           title="Volunteers"
@@ -405,67 +451,75 @@ export function VolunteersSection({
           }
         />
 
-        <div className="relative mt-10 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-muted to-muted p-8 text-center shadow-lg shadow-primary/5 sm:p-12">
-          <div
+        <div
+          className="
+            mt-10
+            rounded-2xl
+            border
+            border-[#4a2a82]/10
+            bg-[#f7f4fb]
+            p-8
+            text-center
+            sm:p-10
+          "
+        >
+          <ImageIcon
+            className="mx-auto size-12 text-[#4a2a82]/30"
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
           />
 
-          <EmptyStateIcon>
-            <ImageIcon
-              className="size-9 text-primary"
-              aria-hidden="true"
-            />
-          </EmptyStateIcon>
-
-          <h3 className="mt-6 font-heading text-h4 font-semibold text-foreground">
+          <h3
+            className="
+              mt-4
+              font-heading
+              text-h4
+              font-semibold
+              text-[#21164f]
+            "
+          >
             Volunteer profiles coming soon
           </h3>
 
-          <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-            The Foundation has not yet published volunteer
-            profiles. They will appear here once approved
-            materials are supplied.
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+            The Foundation has not yet published volunteer profiles.
+            They will appear here once approved materials are supplied.
           </p>
         </div>
 
         {(volunteers.opportunities.length > 0 ||
           volunteers.registrationAvailable) && (
-            <div className="mt-12 max-w-2xl">
-              <h3 className="flex items-center gap-3 font-heading text-h4 font-semibold text-foreground">
-                <span
-                  aria-hidden="true"
-                  className="h-6 w-1 rounded-full bg-gradient-to-b from-primary to-primary/30"
-                />
+            <div className="mt-10 max-w-2xl">
+              <h3
+                className="
+                font-heading
+                text-h4
+                font-semibold
+                text-[#21164f]
+              "
+              >
                 Current volunteer opportunities
               </h3>
 
-              <ul className="mt-5 flex flex-col gap-3">
+              <ul className="mt-4 flex flex-col gap-2">
                 {volunteers.opportunities.map((opp) => (
                   <li
                     key={opp}
                     className="
-                      flex
-                      items-center
-                      gap-3
-                      rounded-lg
-                      border
-                      border-primary/15
-                      bg-primary/5
-                      px-4
-                      py-3
-                      text-sm
-                      text-foreground/80
-                      transition-colors
-                      duration-200
-                      hover:border-primary/35
-                      hover:bg-primary/10
-                      motion-reduce:transition-none
-                    "
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-muted-foreground
+                  "
                   >
                     <span
                       aria-hidden="true"
-                      className="size-2 shrink-0 rounded-full bg-primary shadow-[0_0_10px] shadow-primary"
+                      className="
+                      size-1.5
+                      shrink-0
+                      rounded-full
+                      bg-[#5b3a8f]
+                    "
                     />
                     {opp}
                   </li>
@@ -474,13 +528,8 @@ export function VolunteersSection({
 
               {volunteers.registrationAvailable &&
                 volunteers.registrationUrl && (
-                  <div className="mt-8">
-                    <Button
-                      asChild
-                      variant="default"
-                      size="lg"
-                      className="shadow-lg shadow-primary/30 transition-shadow hover:shadow-xl hover:shadow-primary/40"
-                    >
+                  <div className="mt-6">
+                    <Button asChild size="lg">
                       <a
                         href={volunteers.registrationUrl}
                         target="_blank"
@@ -497,12 +546,12 @@ export function VolunteersSection({
                 )}
 
               {!volunteers.registrationAvailable && (
-                <p className="mt-5 rounded-lg border border-border/60 bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
-                  Volunteer registration is not currently
-                  available. Please check back later or{" "}
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Volunteer registration is not currently available.
+                  Please check back later or{" "}
                   <a
                     href="/contact"
-                    className="font-medium text-primary underline-offset-4 hover:underline"
+                    className="font-medium text-[#5b3a8f] hover:underline"
                   >
                     contact us
                   </a>{" "}
