@@ -11,6 +11,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import type { VolunteerInfo } from "@/content/types";
+import { MobilePeopleCarousel } from "./mobile-people-carousel";
+
 
 export type PersonProps = {
   name: string | null;
@@ -204,7 +206,6 @@ export function PeopleSection({
   people,
   emptyMessage,
   icon: Icon,
-  marquee = false,
 }: PeopleSectionProps) {
   const hasConfirmedPeople = people.some(
     (p) => !!p.name && p.name !== "[CLIENT TO PROVIDE]",
@@ -276,115 +277,43 @@ export function PeopleSection({
           description={description}
         />
 
-        {marquee ? (
-          <div
-            className="
-      relative
-      mt-10
-      overflow-hidden
-      py-2
-    "
-          >
-            {/* Left fade */}
-            <div
-              aria-hidden="true"
-              className="
-        pointer-events-none
-        absolute
-        inset-y-0
-        left-0
-        z-20
-        w-20
-        bg-gradient-to-r
-        from-[#f7f4fb]
-        to-transparent
-      "
-            />
+        {(() => {
+          const confirmedPeople = people.filter(
+            (p) => !!p.name && p.name !== "[CLIENT TO PROVIDE]",
+          );
 
-            {/* Right fade */}
-            <div
-              aria-hidden="true"
-              className="
-        pointer-events-none
-        absolute
-        inset-y-0
-        right-0
-        z-20
-        w-20
-        bg-gradient-to-l
-        from-[#f7f4fb]
-        to-transparent
-      "
-            />
+          return (
+            <>
+              {/* ============================================================
+          MOBILE — CAROUSEL
+          ============================================================ */}
+              <MobilePeopleCarousel people={confirmedPeople} />
 
-            <div className="leadership-marquee">
-              {/* First copy */}
-              <ul className="leadership-marquee-track">
-                {people
-                  .filter(
-                    (p) =>
-                      !!p.name &&
-                      p.name !== "[CLIENT TO PROVIDE]",
-                  )
-                  .map((person) => (
-                    <li
-                      key={`first-${person.name}-${person.role}`}
-                      className="w-[280px] shrink-0 sm:w-[300px]"
-                    >
-                      <PersonCard {...person} />
-                    </li>
-                  ))}
-              </ul>
-
-              {/* Duplicate copy for seamless loop */}
+              {/* ============================================================
+          TABLET / DESKTOP — GRID
+          ============================================================ */}
               <ul
-                className="leadership-marquee-track"
-                aria-hidden="true"
+                className="
+          mt-10
+          hidden
+          gap-7
+          sm:grid
+          sm:grid-cols-2
+          lg:grid-cols-3
+        "
               >
-                {people
-                  .filter(
-                    (p) =>
-                      !!p.name &&
-                      p.name !== "[CLIENT TO PROVIDE]",
-                  )
-                  .map((person) => (
-                    <li
-                      key={`second-${person.name}-${person.role}`}
-                      className="w-[280px] shrink-0 sm:w-[300px]"
-                    >
-                      <PersonCard {...person} />
-                    </li>
-                  ))}
+                {confirmedPeople.map((person) => (
+                  <li
+                    key={`${person.name}-${person.role}`}
+                    className="h-full"
+                  >
+                    <PersonCard {...person} />
+                  </li>
+                ))}
               </ul>
-            </div>
-          </div>
-        ) : (
-          <ul
-            className="
-      mt-10
-      grid
-      gap-7
-      sm:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-4
-    "
-          >
-            {people
-              .filter(
-                (p) =>
-                  !!p.name &&
-                  p.name !== "[CLIENT TO PROVIDE]",
-              )
-              .map((person) => (
-                <li
-                  key={`${person.name}-${person.role}`}
-                  className="h-full"
-                >
-                  <PersonCard {...person} />
-                </li>
-              ))}
-          </ul>
-        )}
+            </>
+          );
+        })()}
       </Container>
     </Section>
   );
