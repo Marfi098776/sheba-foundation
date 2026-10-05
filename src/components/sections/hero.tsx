@@ -248,50 +248,44 @@ export async function Hero() {
                 {/* Video */}
                 <div
                   className="
-          relative
-          aspect-[9/16]
-          overflow-hidden
-          rounded-2xl
-          shadow-2xl
-          transition-all
-          duration-500
-          hover:-translate-y-1
-          hover:shadow-[0_25px_60px_rgba(0,0,0,0.35)]
-        "
+    relative
+    mx-auto
+    w-full
+    max-w-[360px]
+    overflow-hidden
+    rounded-2xl
+    border
+    border-white/20
+    bg-black
+    shadow-2xl
+    transition-all
+    duration-500
+    hover:-translate-y-1
+    hover:shadow-[0_25px_60px_rgba(0,0,0,0.4)]
+  "
                 >
-                  <video
-                    className="block h-full w-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="metadata"
-                    aria-label="Canadian Sheba Foundation introduction"
-                  >
-                    <source
-                      src="/videos/cad2.mp4"
-                      type="video/mp4"
-                    />
+                  <iframe
+                    className="block aspect-[9/16] w-full"
+                    src="https://www.youtube.com/embed/VuQMND2x6DQ"
+                    title="Canadian Sheba Foundation introduction"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
 
-                    Your browser does not support the video element.
-                  </video>
-
-                  {/* Subtle video overlay */}
+                  {/* Subtle overlay */}
                   <div
                     aria-hidden="true"
                     className="
-            pointer-events-none
-            absolute
-            inset-0
-            bg-gradient-to-t
-            from-black/20
-            via-transparent
-            to-white/5
-          "
+      pointer-events-none
+      absolute
+      inset-0
+      bg-gradient-to-t
+      from-black/10
+      via-transparent
+      to-white/5
+    "
                   />
                 </div>
-
               </div>
             </ScrollReveal>
           </div>
