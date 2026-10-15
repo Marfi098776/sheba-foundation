@@ -42,7 +42,7 @@ export default async function VolunteerPage() {
         description={content.hero.description}
       />
 
-      <InformationNotice
+      {/* <InformationNotice
         title="Registration status"
         description={content.registrationAvailable
           ? content.registrationUrl
@@ -50,7 +50,7 @@ export default async function VolunteerPage() {
             : "Registration is available."
           : "Online volunteer registration is not yet available. The Foundation intends to provide registration through an external service; details will be published once confirmed."}
         variant="pending"
-      />
+      /> */}
 
       <Section>
         <Container className="max-w-4xl">
