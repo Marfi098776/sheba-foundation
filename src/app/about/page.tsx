@@ -72,8 +72,7 @@ export default async function AboutPage() {
                     Mission
                   </h3>
                   <p className="mt-4 text-muted-foreground">
-                    The official mission statement has not been supplied yet. It will be
-                    published here once approved by the Foundation.
+                    Sheba Foundation is dedicated to improving lives through education, opportunity, compassion and community support. We provide scholarships and educational assistance, support children and families in need, empower newcomers and vulnerable communities and promote health and well-being through knowledge, mentorship and community-based initiatives.
                   </p>
                 </div>
               )}
@@ -92,8 +91,7 @@ export default async function AboutPage() {
                     Vision
                   </h3>
                   <p className="mt-4 text-muted-foreground">
-                    The official vision statement has not been supplied yet. It will be
-                    published here once approved by the Foundation.
+                    A compassionate and empowered community where every individual has the opportunity to learn, thrive, contribute and build a better future.
                   </p>
                 </div>
               )}

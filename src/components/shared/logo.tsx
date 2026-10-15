@@ -17,7 +17,7 @@ export function Logo({ className }: LogoProps) {
       )}
     >
       <Image
-        src="/images/Untitled design (1).png"
+        src="/images/cad-new-logo-no-bg.png"
         alt="Canadian Sheba Foundation"
         width={1867}
         height={412}

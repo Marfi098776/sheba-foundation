@@ -15,12 +15,20 @@ export const familySupportContent = {
     "The Foundation works with families experiencing financial hardship to provide practical support that helps children stay in school, eat well, and meet essential needs. The program areas below reflect the Foundation's confirmed focus. Specific eligibility criteria, application processes, and assistance levels have not been finalised and will be published when approved.",
   activities: [
     {
-      title: "Educational support for children",
+      title: "Educational support for children and adults",
       description:
         "Support for children from low-income families to take part in education.",
     },
-    { title: "School supplies", description: null },
-    { title: "Healthy food and meal assistance", description: null },
+    {
+      title: "School supplies",
+      description:
+        "Assistance with essential school supplies to help children from low-income families prepare for their education.",
+    },
+    {
+      title: "Healthy food and meal assistance",
+      description:
+        "Support with healthy food and meals to help children and families experiencing financial hardship.",
+    },
     {
       title: "Limited financial assistance",
       description:

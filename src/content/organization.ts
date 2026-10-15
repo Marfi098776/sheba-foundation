@@ -46,7 +46,7 @@ const organization: OrganizationInfo = {
       name: "Dr. Shahed Iqbal",
       role: "Treaserer-Finance Officer",
       bio: null,
-      photo: "/images/shahed-bg.png",
+      photo: "/images/Dr-shahed-new.png",
     },
     {
       id: "mahmudul-mannan",

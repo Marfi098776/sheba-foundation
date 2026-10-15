@@ -126,7 +126,7 @@ const siteInfo: SiteInfo = {
   url: SITE_URL,
   locale: "en",
   contact: {
-    email: null,
+    email: "canadianshebafoundation@gmail.com",
     phone: null,
     address: null,
     hours: null,

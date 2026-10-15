@@ -21,7 +21,7 @@ const programs: Program[] = [
     description: null,
     activities: [
       {
-        title: "Educational support for children",
+        title: "Educational support for children and adults",
         description:
           "Support for children from low-income families to take part in education.",
       },
